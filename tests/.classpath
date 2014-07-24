@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Volley"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AndroyVolleyExt"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="output" path="bin/classes"/>
+	<classpathentry kind="src" path="volley_ext_test_src"/>
+	<classpathentry kind="lib" path="libs/awaitility-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libs/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-all-1.9.11.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-databind-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/jericho-android.3.1.jar"/>
+	<classpathentry kind="lib" path="libs/mock-http-server-4.0.jar"/>
+	<classpathentry kind="lib" path="libs/mockito-core-1.9.5.jar"/>
+	<classpathentry kind="lib" path="libs/robolectric-2.3-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="libs/simple-xml-2.7.1.jar"/>
+	<classpathentry kind="lib" path="libs/android.jar"/>
+	<classpathentry kind="lib" path="libs/annotations.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AndroyKKOExam"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
