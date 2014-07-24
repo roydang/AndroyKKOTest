@@ -27,18 +27,17 @@ public class KKOApplication extends AndroyApplication {
 	private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024;
 	private static final long DEFAULT_MAX_AGE = 60;
 	private static final String CACHE_FOLDER = "/test-universal";
-
+	private static KKOApplication application;
 	@Override
 	public void onCreate() {
 		Log.d("unknown","## MyApplication init");
 		super.onCreate();
-		
-		
-		
-		com.android.volley.VolleyLog.DEBUG  = true;
-		super.onCreate();
+		com.android.volley.VolleyLog.DEBUG  = false;
+		application = this;
 	}
-
+	public static KKOApplication getApplication() {
+		return application;
+	}
 	@Override
 	protected Cache getDefaultDiskCache(Context context) {
 		File cacheDir = new File(context.getCacheDir().getPath() + CACHE_FOLDER);
