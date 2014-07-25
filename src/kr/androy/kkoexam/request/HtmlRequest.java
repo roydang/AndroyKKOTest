@@ -73,6 +73,7 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
             			System.out.println("ext=>" + ext);
             		}
             	}
+            	photo.setType(1);
         		photoList.add(photo);
             }
 			ThumbPhotoList photoListObj = new ThumbPhotoList();
@@ -89,27 +90,6 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
 
 	}
 
-//	@Override
-//	protected Response<T> parseNetworkResponse(NetworkResponse response) {
 
-//		String charset = HttpHeaderParser.parseCharset(response.headers);
-//		Reader reader = null;
-//		try {
-//			reader = new InputStreamReader(new ByteArrayInputStream(response.data), charset);
-//			T result = persister.read(getTargetClass(),	reader);
-//			return Response.success(result, HttpHeaderParser.parseCacheHeaders(response));
-//			
-//		} catch (UnsupportedEncodingException e) {
-//			return Response.error(new ParseError(e));
-//		} catch (XmlPullParserException e) {
-//			return Response.error(new ParseError(e));
-//		} catch (ElementException e) {
-//			return Response.error(new ParseError(e));
-//		} catch (Exception e) {
-//			return Response.error(new VolleyError(e));
-//		} finally {
-//			IoUtils.closeQuietly(reader);
-//		}
-//	}
 
 }

@@ -25,19 +25,22 @@ import com.navercorp.volleyextensions.cache.universalimageloader.memory.impl.Uni
 public class KKOApplication extends AndroyApplication {
 
 	private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024;
-	private static final long DEFAULT_MAX_AGE = 60;
-	private static final String CACHE_FOLDER = "/test-universal";
+	private static final long DEFAULT_MAX_AGE = 10 * 60; //second
+	private static final String CACHE_FOLDER = "/kko-exam-cache";
 	private static KKOApplication application;
 	@Override
 	public void onCreate() {
 		Log.d("unknown","## MyApplication init");
 		super.onCreate();
-		com.android.volley.VolleyLog.DEBUG  = false;
+		com.android.volley.VolleyLog.DEBUG  = true;
 		application = this;
 	}
 	public static KKOApplication getApplication() {
 		return application;
 	}
+	/**
+	 * internal cache folder
+	 */
 	@Override
 	protected Cache getDefaultDiskCache(Context context) {
 		File cacheDir = new File(context.getCacheDir().getPath() + CACHE_FOLDER);
