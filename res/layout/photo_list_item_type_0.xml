@@ -13,8 +13,8 @@
 	    android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
     	android:layout_toRightOf="@+id/img_view"
-    	android:layout_centerVertical="true"
-    	android:textSize="10dp"
+    	android:layout_marginTop="10dp"
+    	android:textSize="13dp"
     	android:text="12341234"
     	android:textColor="#000000"/>
 	<TextView 

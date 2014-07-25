@@ -1,30 +1,38 @@
 package kr.androy.kkoexam.photo;
 
+import kr.androy.kkoexam.KKOApplication;
 import kr.androy.kkoexam.R;
 import kr.androy.kkoexam.base.ApiURL;
 import kr.androy.kkoexam.model.ThumbPhoto;
 import kr.androy.kkoexam.photo.PhotoListAdapter.PhotoRowType;
+import kr.androy.volleyext.base.util.display.DisplayUtility;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.NetworkImageView;
 
-public class PhotoType2Row implements PhotoRow {
+public class PhotoType0Row implements PhotoRow {
 
     private final LayoutInflater inflater;
     private final ThumbPhoto photo;
     private int itemResId;
     private ImageLoader imageLoader;
     
-    public PhotoType2Row(LayoutInflater inflater, ThumbPhoto photo, int itemResId, ImageLoader imageLoader) {
+    public PhotoType0Row(LayoutInflater inflater, ThumbPhoto photo, int itemResId) {
     	this.inflater = inflater;
     	this.photo = photo;
     	this.itemResId = itemResId;
+    	this.imageLoader = KKOApplication.getImageLoader();
     }
-    @Override
+	@Override
 	public View render(int position, View convertView, ViewGroup parent) {
 
 		final ViewHolder holder;
@@ -52,7 +60,7 @@ public class PhotoType2Row implements PhotoRow {
 
 	@Override
 	public int getViewType() {		
-		return PhotoRowType.TYPE2.ordinal();
+		return PhotoRowType.TYPE0.ordinal();
 	}
 
 	@Override

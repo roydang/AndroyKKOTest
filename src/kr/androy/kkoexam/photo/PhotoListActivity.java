@@ -15,7 +15,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 
 public class PhotoListActivity extends Activity {
 
@@ -24,11 +23,11 @@ public class PhotoListActivity extends Activity {
 	private RequestQueue requestQueue;
 	private ListView listView;
 	private PhotoListAdapter listAdapter;
-	private ImageLoader imageLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);    
+        setContentView(R.layout.activity_photo_list);    
         
         init();
         
@@ -37,7 +36,6 @@ public class PhotoListActivity extends Activity {
     
     private void init() {
     	requestQueue = KKOApplication.getRequestQueue();
-    	imageLoader = KKOApplication.getImageLoader();
     	
         listView = (ListView)findViewById(R.id.list_view);
         listView.setOnScrollListener(new VExtOnScrollListener(requestQueue, true, true));
@@ -65,6 +63,7 @@ public class PhotoListActivity extends Activity {
 				}
 	    		
 			});
+    	request.setShouldCache(true);
     	requestQueue.add(request);
     }
 }

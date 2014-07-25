@@ -1,17 +1,20 @@
 package kr.androy.kkoexam.request;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
-import kr.androy.kkoexam.model.ThumbPhotoList;
 import kr.androy.kkoexam.model.ThumbPhoto;
-import net.htmlparser.jericho.Attributes;
+import kr.androy.kkoexam.model.ThumbPhotoList;
+import kr.androy.volleyext.base.util.log.Logger;
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.TextExtractor;
+import android.os.Environment;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -19,11 +22,12 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.google.gson.Gson;
 import com.navercorp.volleyextensions.request.AbstractConverterRequest;
 
 public class HtmlRequest<T> extends AbstractConverterRequest<T> {
 
-	
+	private static final Logger logger = Logger.getLogger(HtmlRequest.class);
 	
 	public HtmlRequest(String url, Class<T> clazz, Listener<T> listener) {
 		super(url, clazz, listener);
@@ -49,16 +53,11 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
       
             for (int i = 0; i < list.size(); i++) {
             	Element element = list.get(i);            
-            	System.out.println("Ele=>" + element);
-            	
-//            	List<Element> srcList = element.getAllElements("src",Pattern.compile("/Images/Thumbnails/[0-9]+/[0-9]+.jpg"));
-//            	for (Element srcEle:srcList) {
-//            		System.out.println("Ele srcEle=>" + srcEle);
-//            	}
-            	
+
             	List<Element> aList = element.getAllElements(HTMLElementName.A);
             	
          		ThumbPhoto photo = new ThumbPhoto();
+         		int itemType = 1;
             	for (Element aEle:aList) {
             		List<Element> childEle = aEle.getChildElements();
             		
@@ -66,19 +65,24 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
             			Element imgEle = childEle.get(0);  
             			String srcStr = imgEle.getAttributeValue("src");
             			photo.setImageUrl(srcStr);
-            			System.out.print("imgSrc=>" + srcStr);
+
             		} else {
             			TextExtractor ext = aEle.getTextExtractor();
-            			photo.setTitle(ext.toString());
-            			System.out.println("ext=>" + ext);
+            			String title = ext.toString();
+            			photo.setTitle(title);
+
             		}
             	}
-            	photo.setType(1);
+    			itemType = i%2;
+    			logger.d("# itemType:%s", itemType);
+    			photo.setType(itemType);
         		photoList.add(photo);
+        		
+        		
             }
 			ThumbPhotoList photoListObj = new ThumbPhotoList();
 			photoListObj.setPhotoList(photoList);
-//			Object o = photoList;
+			jsonToFile(photoListObj);
 			
 			
             return Response.success((T)photoListObj, HttpHeaderParser.parseCacheHeaders(response));
@@ -89,7 +93,23 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
 		}
 
 	}
-
+	private void jsonToFile(Object json) {
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(json);
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(new File(Environment.getExternalStorageDirectory().getPath()+"/photos.json"));
+			fw.write(jsonStr);
+			fw.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fw.close();
+			} catch (IOException e) { }
+		}
+	
+	}
 
 
 }

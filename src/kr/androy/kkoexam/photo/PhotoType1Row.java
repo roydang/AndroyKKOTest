@@ -5,18 +5,12 @@ import kr.androy.kkoexam.R;
 import kr.androy.kkoexam.base.ApiURL;
 import kr.androy.kkoexam.model.ThumbPhoto;
 import kr.androy.kkoexam.photo.PhotoListAdapter.PhotoRowType;
-import kr.androy.volleyext.base.util.display.DisplayUtility;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageLoader.ImageContainer;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.NetworkImageView;
 
 public class PhotoType1Row implements PhotoRow {
@@ -26,13 +20,13 @@ public class PhotoType1Row implements PhotoRow {
     private int itemResId;
     private ImageLoader imageLoader;
     
-    public PhotoType1Row(LayoutInflater inflater, ThumbPhoto photo, int itemResId, ImageLoader imageLoader) {
+    public PhotoType1Row(LayoutInflater inflater, ThumbPhoto photo, int itemResId) {
     	this.inflater = inflater;
     	this.photo = photo;
     	this.itemResId = itemResId;
-    	this.imageLoader = imageLoader;
+    	this.imageLoader = KKOApplication.getImageLoader();
     }
-	@Override
+    @Override
 	public View render(int position, View convertView, ViewGroup parent) {
 
 		final ViewHolder holder;

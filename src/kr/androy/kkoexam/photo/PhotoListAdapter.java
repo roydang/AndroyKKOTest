@@ -17,7 +17,7 @@ import android.widget.BaseAdapter;
 public class PhotoListAdapter extends BaseAdapter {
 
 	enum PhotoRowType{
-		TYPE1(1),TYPE2(2);
+		TYPE0(0),TYPE1(1);
 		
 		private int type;
 		private PhotoRowType(int type) {
@@ -29,25 +29,33 @@ public class PhotoListAdapter extends BaseAdapter {
 	}
 	private Context context;
 	private List<PhotoRow> rows;
-	private ImageLoader imageLoader;
+//	private ImageLoader imageLoader;
 
 	public PhotoListAdapter(Context context){
 		this.context = context;
 		this.rows = new ArrayList<PhotoRow>();
-		this.imageLoader = KKOApplication.getImageLoader();
+//		this.imageLoader = KKOApplication.getImageLoader();
 	}
 	public void setPhotoList(List<ThumbPhoto> photoList) {
 
 		LayoutInflater inflater = LayoutInflater.from(context);
 		
 		for (ThumbPhoto photo : photoList) {
-			if(photo.getType() == PhotoRowType.TYPE1.getTypeNum()) {
-				rows.add(new PhotoType1Row(inflater, photo, R.layout.photo_list_item, this.imageLoader));
-			} else if (photo.getType() == PhotoRowType.TYPE2.getTypeNum()) {
-				rows.add(new PhotoType2Row(inflater, photo, R.layout.photo_list_item, this.imageLoader));
+			if(photo.getType() == PhotoRowType.TYPE0.getTypeNum()) {
+				rows.add(new PhotoType0Row(inflater, photo, R.layout.photo_list_item_type_0));
+			} else if (photo.getType() == PhotoRowType.TYPE1.getTypeNum()) {
+				rows.add(new PhotoType1Row(inflater, photo, R.layout.photo_list_item_type_1));
 			}
 		}
 		notifyDataSetChanged();
+	}
+	@Override
+	public int getViewTypeCount() {	
+		return PhotoRowType.values().length;
+	}
+	@Override
+	public int getItemViewType(int position) {		
+		return rows.get(position).getViewType();
 	}
 	@Override
 	public int getCount() {
