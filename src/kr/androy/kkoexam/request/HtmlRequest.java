@@ -82,7 +82,6 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
             }
 			ThumbPhotoList photoListObj = new ThumbPhotoList();
 			photoListObj.setPhotoList(photoList);
-			jsonToFile(photoListObj);
 			
 			
             return Response.success((T)photoListObj, HttpHeaderParser.parseCacheHeaders(response));
@@ -92,23 +91,6 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
 			return Response.error(new ParseError(e));
 		}
 
-	}
-	private void jsonToFile(Object json) {
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(json);
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter(new File(Environment.getExternalStorageDirectory().getPath()+"/photos.json"));
-			fw.write(jsonStr);
-			fw.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				fw.close();
-			} catch (IOException e) { }
-		}
-	
 	}
 
 

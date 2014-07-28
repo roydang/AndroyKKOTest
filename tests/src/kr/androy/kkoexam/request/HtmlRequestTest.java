@@ -1,5 +1,8 @@
 package kr.androy.kkoexam.request;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -28,12 +31,7 @@ public class HtmlRequestTest {
 	
 	@Test
 	public void testParseNetworkResponse() throws Exception {
-		// Given
-//		String content =
-//		"<news>\n" + 
-//		 "   <imageUrl>http://static.naver.com/volley-ext.jpg</imageUrl>\n" + 
-//		 "   <title>Volley extention has released</title>\n" + 
-//		 "</news>";
+
 		File file = new File(".");
 		System.out.println("File Path=" + file.getAbsolutePath());
 		FileReader fr = new FileReader(new File("./test_res/gettyimagesgallery.html"));
@@ -56,16 +54,14 @@ public class HtmlRequestTest {
 		
 		System.out.println("PHOTO thumbPhotoList=" + photoArr);
 		
+		String photoUrl = null;
 		for(ThumbPhoto photo:photoArr) {
-			System.out.println("PHOTO URL=" + photo.getImageUrl());
+			photoUrl = photo.getImageUrl();
+			System.out.println("PHOTO URL=" + photoUrl);
+			
 		}
-		
-		// When
-//		Response<News> response = request.parseNetworkResponse(networkResponse);
-//		// Then
-//		News news = response.result;
-//		assertThat(news.imageUrl, is("http://static.naver.com/volley-ext.jpg"));
-//		assertThat(news.title, is("Volley extention has released"));
+		assertTrue(photoUrl.startsWith("/Images/Thumbnails"));
+
 	}
 	
 

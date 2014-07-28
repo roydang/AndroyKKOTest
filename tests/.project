@@ -16,9 +16,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>volley_ext_test_src</name>
+			<name>src_lib</name>
 			<type>2</type>
-			<location>C:/WORK_ADT/GitRepository/AndroyVolleyExt/tests/src</location>
+			<location>C:/WORK/GitRepository/AndroyVolleyExt/src_lib</location>
 		</link>
 	</linkedResources>
 </projectDescription>
