@@ -24,8 +24,8 @@ import com.navercorp.volleyextensions.cache.universalimageloader.memory.impl.Uni
 
 public class KKOApplication extends AndroyApplication {
 
-	private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024;
-	private static final long DEFAULT_MAX_AGE = 10 * 60; //second
+	private static final int DEFAULT_CACHE_SIZE = 210 * 1024 * 1024;
+	private static final long DEFAULT_MAX_AGE = 1 * 60 * 60; //second
 	private static final String CACHE_FOLDER = "/kko-exam-cache";
 	private static KKOApplication application;
 	@Override
