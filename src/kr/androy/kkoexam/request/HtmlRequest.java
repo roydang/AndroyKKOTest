@@ -1,8 +1,5 @@
 package kr.androy.kkoexam.request;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,6 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.TextExtractor;
-import android.os.Environment;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -22,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.google.gson.Gson;
 import com.navercorp.volleyextensions.request.AbstractConverterRequest;
 
 public class HtmlRequest<T> extends AbstractConverterRequest<T> {
@@ -74,7 +69,6 @@ public class HtmlRequest<T> extends AbstractConverterRequest<T> {
             		}
             	}
     			itemType = i%2;
-    			logger.d("# itemType:%s", itemType);
     			photo.setType(itemType);
         		photoList.add(photo);
         		

@@ -9,7 +9,9 @@ import kr.androy.volleyext.adpter.VExtOnScrollListener;
 import kr.androy.volleyext.base.util.log.Logger;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
@@ -20,9 +22,11 @@ public class PhotoListActivity extends Activity {
 
 	private static final Logger logger = Logger.getLogger(PhotoListActivity.class);
 	
-	private RequestQueue requestQueue;
-	private ListView listView;
+	private RequestQueue requestQueue;	
 	private PhotoListAdapter listAdapter;
+	
+	private ListView listView;
+	private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class PhotoListActivity extends Activity {
     	requestQueue = KKOApplication.getRequestQueue();
     	
         listView = (ListView)findViewById(R.id.list_view);
+        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
         listView.setOnScrollListener(new VExtOnScrollListener(requestQueue, true, true));
         listAdapter = new PhotoListAdapter(PhotoListActivity.this);
         
@@ -50,16 +55,15 @@ public class PhotoListActivity extends Activity {
 
 				@Override
 				public void onResponse(ThumbPhotoList photoList) {
-					System.out.println("ThumbPhotoList photoList="+photoList);
 					logger.d("ThumbPhotoList photoList:%s", photoList);
 					listAdapter.setPhotoList(photoList.getPhotoList());
+					progressBar.setVisibility(View.GONE);
 				}
     		
 	    	}, new ErrorListener() {
 	
 				@Override
 				public void onErrorResponse(VolleyError arg0) {
-					System.out.println("ThumbPhotoList onErrorResponse="+arg0);
 				}
 	    		
 			});
